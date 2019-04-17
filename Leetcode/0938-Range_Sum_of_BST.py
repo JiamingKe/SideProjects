@@ -10,10 +10,16 @@ class Solution:
         if root is None:
             return 0
         
-        if root.val <= R and root.val >= L:
+        if root.val < R and root.val > L:
             return self.rangeSumBST(root.left, L, R) + root.val + self.rangeSumBST(root.right, L, R)
         else:
-            if root.val < L:
+            result = 0
+            if root.val <= L:
+                if root.val == L:
+                    return self.rangeSumBST(root.right, L, R) + root.val
                 return self.rangeSumBST(root.right, L, R)
+
             else:
+                if root.val == R:
+                    return self.rangeSumBST(root.left, L, R) + root.val
                 return self.rangeSumBST(root.left, L, R)
